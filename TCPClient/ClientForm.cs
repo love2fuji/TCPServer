@@ -49,10 +49,30 @@ namespace TCPClient
             }
             catch (Exception ex)
             {
+                ShowMsg("连接失败："+ ex);
             }
 
         }
 
-       
+
+
+        private void btnClientSend_Click(object sender, EventArgs e)
+        {
+            string sendString = rhtServerInput.Text.TrimEnd();
+            try
+            {
+                string severIP = tbServerIP.Text.TrimEnd();
+
+                byte[] buffer = new byte[1024 * 1024 * 5];
+                buffer = Encoding.UTF8.GetBytes(sendString);
+                clientSocket.Send(buffer);
+            }
+            catch (Exception ex)
+            {
+                ShowMsg(ex.Message);
+            }
+
+
+        }
     }
 }
